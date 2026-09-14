@@ -1,18 +1,15 @@
 {
-  "name": "v2ray",
+  "name": "express-hello-world",
   "version": "1.0.0",
-  "description": "V2ray Server",
-  "main": "index.js",
-  "repository": "https://github.com/tahaghafuri/vercel-v2ray",
-  "author": "tahaghafuri",
+  "author": "fscarmen",
   "license": "MIT",
   "private": false,
   "scripts": {
-    "start": "node index.js"
+    "start": "node server.js"
   },
   "dependencies": {
     "express": "^4.18.2",
-    "http-proxy-middleware": "^3.0.0-beta.0",
+    "http-proxy-middleware": "^2.0.6",
     "request": "^2.88.2",
     "basic-auth": "^2.0.1"
   },
