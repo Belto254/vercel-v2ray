@@ -1,7 +1,6 @@
 {
   "name": "express-hello-world",
   "version": "1.0.0",
-  "main": "server.js",
   "repository": "https://github.com/fscarmen2/Argo-X-JS-PaaS",
   "author": "fscarmen",
   "license": "MIT",
