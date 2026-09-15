@@ -13,30 +13,48 @@ wss.on("connection", (client) => {
   );
 
   target.on("open", () => {
+    client.on("message", (data, isBinary) => {
+      if (target.readyState === WebSocket.OPEN) {
+        target.send(data, { binary: isBinary });
+      }
+    });
+  });
+
+  target.on("message", (data, isBinary) => {
     if (client.readyState === WebSocket.OPEN) {
-      client.send("BACKEND_CONNECTED");
+      client.send(data, { binary: isBinary });
     }
   });
 
-  target.on("error", (err) => {
+  target.on("error", () => {
     if (client.readyState === WebSocket.OPEN) {
-      client.send("BACKEND_ERROR");
       client.close();
     }
   });
 
   target.on("close", () => {
     if (client.readyState === WebSocket.OPEN) {
-      client.send("BACKEND_CLOSED");
+      client.close();
     }
-    client.close();
+  });
+
+  client.on("error", () => {
+    if (target.readyState === WebSocket.OPEN) {
+      target.close();
+    }
+  });
+
+  client.on("close", () => {
+    if (target.readyState === WebSocket.OPEN) {
+      target.close();
+    }
   });
 });
 
 app.get("/", (req, res) => {
   res.json({
     status: "online",
-    relay: "diagnostic"
+    relay: "active"
   });
 });
 
