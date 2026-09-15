@@ -1,15 +1,25 @@
+import express from "express";
+import { createServer } from "http";
 import { WebSocketServer } from "ws";
 
-const wss = new WebSocketServer({ noServer: true });
+const app = express();
+const server = createServer(app);
 
-export default function handler(req, res) {
-  if (req.headers.upgrade?.toLowerCase() === "websocket") {
-    res.status(426).send("WebSocket upgrade required");
-    return;
-  }
+const wss = new WebSocketServer({ server });
 
-  res.status(200).json({
-    status: "online",
-    websocket: "test-ready"
+wss.on("connection", (ws) => {
+  ws.send("Vercel WebSocket connected");
+
+  ws.on("message", (message) => {
+    ws.send(`echo: ${message}`);
   });
-}
+});
+
+app.get("/", (req, res) => {
+  res.json({
+    status: "online",
+    websocket: "active"
+  });
+});
+
+export default server;
