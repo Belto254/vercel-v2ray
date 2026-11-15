@@ -18,12 +18,9 @@ wss.on("connection", (client) => {
   const pending = [];
 
   const target = new WebSocket(
-    "wss://eu-2.hihu.net/jspuwqay",
+    "ws://eu-2.hihu.net:80/jspuwqay",
     {
-      perMessageDeflate: false,
-      headers: {
-        Host: "eu-2.hihu.net"
-      }
+      perMessageDeflate: false
     }
   );
 
@@ -112,7 +109,9 @@ app.get("/", (req, res) => {
     status: "online",
     relay: "active",
     websocket: true,
-    backend: "eu-2.hihu.net"
+    backend: "eu-2.hihu.net",
+    protocol: "ws",
+    port: 80
   });
 });
 
