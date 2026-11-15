@@ -1,3 +1,4 @@
+
 import express from "express";
 import { createServer } from "http";
 import { WebSocketServer, WebSocket } from "ws";
@@ -14,11 +15,11 @@ wss.on("connection", (client) => {
   const pending = [];
 
   const target = new WebSocket(
-    "wss://de1.v2mess.online/vmess",
+    "wss://eu-2.hihu.net/jspuwqay",
     {
       perMessageDeflate: false,
       headers: {
-        Host: "de1.v2mess.online"
+        Host: "eu-2.hihu.net"
       }
     }
   );
@@ -86,7 +87,7 @@ app.get("/", (req, res) => {
   res.json({
     status: "online",
     relay: "active",
-    backend: "de1.v2mess.online"
+    backend: "eu-2.hihu.net"
   });
 });
 
